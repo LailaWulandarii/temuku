@@ -6,12 +6,20 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('/dokter', 'DokterController::index');
-$routes->post('/dokter/simpan', 'DokterController::simpan');
-$routes->post('/dokter/hapus', 'DokterController::hapus');
-$routes->get('/pasien', 'PasienController::index');
-$routes->post('/pasien/simpan', 'PasienController::simpan');
-$routes->post('/pasien/hapus', 'PasienController::hapus');
-$routes->get('/jadwal', 'JadwalController::index');
-$routes->post('/jadwal/simpan', 'JadwalController::simpan');
-$routes->post('/jadwal/hapus', 'JadwalController::hapus');
+$routes->group('dokter', function ($routes) {
+    $routes->get('/', 'DokterController::index');
+    $routes->post('simpan', 'DokterController::simpan');
+    $routes->post('hapus', 'DokterController::hapus');
+});
+
+$routes->group('pasien', function ($routes) {
+    $routes->get('/', 'PasienController::index');
+    $routes->post('simpan', 'PasienController::simpan');
+    $routes->post('hapus', 'PasienController::hapus');
+});
+
+$routes->group('jadwal', function ($routes) {
+    $routes->get('/', 'JadwalController::index');
+    $routes->post('simpan', 'JadwalController::simpan');
+    $routes->post('hapus', 'JadwalController::hapus');
+});
